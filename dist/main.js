@@ -23,9 +23,9 @@ eval("class Game {\n  constructor() {\n    this.towers = [[3, 2, 1], [], []];\n 
 /*!***************************!*\
   !*** ./src/hanoi-view.js ***!
   \***************************/
-/***/ (() => {
+/***/ ((module) => {
 
-eval("\n\n//# sourceURL=webpack:///./src/hanoi-view.js?");
+eval("class HanoiView {\n  construcor(game, $el) {\n    this.game = game;\n    this.$el = $el;\n  }\n}\n\nmodule.exports = HanoiView;\n\n\n//# sourceURL=webpack:///./src/hanoi-view.js?");
 
 /***/ }),
 
@@ -35,7 +35,7 @@ eval("\n\n//# sourceURL=webpack:///./src/hanoi-view.js?");
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const HanoiGame = __webpack_require__(/*! ./game.js */ \"./src/game.js\");\nconst View = __webpack_require__(/*! ./hanoi-view.js */ \"./src/hanoi-view.js\");\n\n$(() => {\n  const rootEl = $(\".hanoi\");\n  const game = new HanoiGame();\n  new HanoiView(game, rootEl);\n});\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const HanoiGame = __webpack_require__(/*! ./game.js */ \"./src/game.js\");\nconst HanoiView = __webpack_require__(/*! ./hanoi-view.js */ \"./src/hanoi-view.js\");\n\n$(() => {\n  const rootEl = $(\".hanoi\");\n  const game = new HanoiGame();\n  new HanoiView(game, rootEl);\n});\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
