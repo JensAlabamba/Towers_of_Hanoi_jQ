@@ -25,7 +25,7 @@ eval("class Game {\n  constructor() {\n    this.towers = [[3, 2, 1], [], []];\n 
   \***************************/
 /***/ ((module) => {
 
-eval("class HanoiView {\n  construcor(game, $el) {\n    this.game = game;\n    this.$el = $el;\n  }\n}\n\nmodule.exports = HanoiView;\n\n\n//# sourceURL=webpack:///./src/hanoi-view.js?");
+eval("class View {\n  constructor(game, $el) {\n    this.game = game;\n    this.$el = $el;\n\n    this.setupTowers();\n    this.render();\n  }\n}\n\nView.prototype.setupTowers = function () {\n  const $ul = $(\"<ul>\");\n  let count = 3;\n  for (let tower = 0; tower < 3; tower++) {\n    for (let row = 0; row < 3; row++) {\n      let $li = $(\"<li>\");\n\n      $li.data(\"pos\", [tower, row]);\n      if ($li.data(\"pos\")[0] === 0) {\n        $li.text(count);\n        count--;\n      }\n      $ul.append($li);\n    }\n  }\n  this.$el.append($ul);\n};\n\nView.prototype.render = function () {};\n\nmodule.exports = View;\n\n\n//# sourceURL=webpack:///./src/hanoi-view.js?");
 
 /***/ }),
 
