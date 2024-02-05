@@ -9,21 +9,20 @@ class View {
 }
 
 View.prototype.setupTowers = function () {
-  const $ul = $("<ul>");
-  let count = 3;
   for (let tower = 0; tower < 3; tower++) {
+    const $ul = $("<ul>");
+    let count = 1;
     for (let row = 0; row < 3; row++) {
       let $li = $("<li>");
-
       $li.data("pos", [tower, row]);
       if ($li.data("pos")[0] === 0) {
         $li.text(count);
-        count--;
+        count++;
       }
       $ul.append($li);
     }
+    this.$el.append($ul);
   }
-  this.$el.append($ul);
 };
 
 View.prototype.render = function () {};
