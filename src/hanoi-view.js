@@ -3,10 +3,35 @@ class View {
     this.game = game;
     this.$el = $el;
 
+    this.fromTowerIdx = null;
+
+    this.$el.on("click", "ul", this.clickTower.bind(this));
+
     this.setupTowers();
     this.render();
   }
 }
+
+View.prototype.clickTower = function (event) {
+  const clickedTowerIdx = $(event.currentTarget).index();
+
+  if (this.fromTowerIdx === null) {
+    this.fromTowerIdx = clickedTowerIdx;
+  } else {
+    if (!this.game.move(this.fromTowerIdx, clickedTowerIdx)) {
+      alert("Invalid move!!!");
+    }
+    this.fromTowerIdx = null;
+  }
+
+  this.render();
+
+  if (this.game.isWon()) {
+    this.$el.off("click");
+    this.$el.addClass("game-over");
+    alert("Game won! Good work!");
+  }
+};
 
 View.prototype.setupTowers = function () {
   for (let tower = 0; tower < 3; tower++) {
@@ -26,16 +51,20 @@ View.prototype.setupTowers = function () {
 };
 
 View.prototype.render = function () {
-  const $items = this.$el.find("li[data-item]");
+  const $towers = this.$el.find("ul");
+  $towers.removeClass();
 
-  $items.each(function () {
-    const $li = $(this);
-    const item = $li.data("item");
+  if (this.fromTowerIdx !== null) {
+    $towers.eq(this.fromTowerIdx).addClass("selected");
+  }
 
-    if (item) {
-      const width = item * 50; // Assuming you want to multiply by 50
-      $li.addClass("item").width(width);
-    }
+  this.game.towers.forEach((disks, towerIdx) => {
+    const $disks = $towers.eq(towerIdx).children();
+    $disks.removeClass();
+
+    disks.forEach((diskWidth, diskIdx) => {
+      $disks.eq(-1 * (diskIdx + 1)).addClass(`disk-${diskWidth}`);
+    });
   });
 };
 
